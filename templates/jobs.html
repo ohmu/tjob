@@ -1,0 +1,9 @@
+<table width="100%">
+<tr><th>JOB</th><th>BUILD</th><th>STATUS</th><th>STARTED</th></tr>
+{{range .Tasks}}<tr><td>{{.JobName}}</td><td><a href="{{.Status.URL}}">{{.BuildNumber}}</a></td><td>{{.Status.Result}}</td><td>{{.Status.Timestamp}}</td></tr>
+{{end}}</table>
+
+<table width="100%">
+<tr><th>JOB</th><th>BUILD</th><th>STATUS</th><th>CLASS</th><th>FUNCTION</th></tr>
+{{range $task := .Tasks}}{{if .Status.HasTestReport}}{{range .Status.TestReport.Suites}}{{range .Cases}}<tr><td>{{$task.JobName}}</td><td>{{$task.BuildNumber}}</td><td>{{.Status}}</td><td>{{.ClassName}}</td><td>{{.Name}}</td></tr>
+{{end}}{{end}}{{end}}{{end}}</table>

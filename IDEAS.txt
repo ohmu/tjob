@@ -1,0 +1,44 @@
+tjob feature todo list
+======================
+
+certainly
+---------
+* starting build: combine -O flags with default ones, store all of them
+* run/restart --new-tag=X: ensures that tag X does not exist yet, otherwise fails
+* list: listing build options
+* list --before="1d ago"
+* list --passed, --running
+* list --runner ub10 --job packages-master --build 1234 --promotion-deps
+* tail command, multiple jobs
+* list -n: limit number of entries shown
+* add command: add an existing job to local Jobs list without starting one,
+  or maybe: list --set-tag FOO, which will also copy the old options
+* archive command: move matching builds to archive file
+* fix: nil job statuses (entry pointing to a deleted build) must not be passed
+  on, raise an error, gc
+* tests: once the design stabilizes a bit
+* list --no-header: skip printing header line
+* list: options for filtering by test class, case name
+* list --tests: option for listing just the test cases
+* show progress only after a couple of seconds or so, max every N milliseconds
+* restart: fix --confirm to work again
+* terminate command
+
+maybe
+-----
+* query jobs with filters, list jobs "owner=mel, 'since>2h ago'"
+* git bisect command
+* "gist" command for pushing a pretty job report + error details to some gist-like
+  publishing thing
+* tail command with pattern matching support, e.g. grep for sub phases in
+  a long job, or just filter out crap
+* restart: require at least one filtering option
+* "tjob list" as the default command "tjob", "tjob restart" -> "tjob --restart"
+* automatic backups of default.json
+* replace "started job" msg with standard tabout display (without sorting and
+  buffering)
+* artifact manipulation commands
+
+unlikely
+--------
+* daemon mode, rest api
