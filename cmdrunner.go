@@ -89,7 +89,7 @@ func (r *runnerUpdateCmd) Execute(args []string) error {
 		conf.Runners[r.RunnerID].SSHKey = value
 	}
 	if value := r.User; value != "" {
-		conf.Runners[r.User].User = value
+		conf.Runners[r.RunnerID].User = value
 	}
 	if value := r.Insecure; value != "" {
 		flag, err := strconv.ParseBool(value)
