@@ -23,6 +23,9 @@ certainly
 * show progress only after a couple of seconds or so, max every N milliseconds
 * restart: fix --confirm to work again
 * terminate command
+* workaround: incorrect branch name/commit-id recorded immediately after job
+  start until jenkins has figured out the correct revision
+* "-T a,b" needs to work like "-T a -T b"
 
 maybe
 -----
