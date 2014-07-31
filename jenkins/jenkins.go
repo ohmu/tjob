@@ -185,7 +185,7 @@ func (j *Jenkins) QueryJobStatus(jobName string, jobNumber string, testDetails b
 		status.GitStatus = &gitStatus
 	} else {
 		// TODO: no sense to show warning here?
-		fmt.Println("WARNING: failed to parse gitStatus:", err)
+		//fmt.Println("WARNING: failed to parse gitStatus:", err)
 	}
 
 	status.Prune() // trim off extra weight
