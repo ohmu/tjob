@@ -26,6 +26,7 @@ certainly
 * workaround: incorrect branch name/commit-id recorded immediately after job
   start until jenkins has figured out the correct revision
 * "-T a,b" needs to work like "-T a -T b"
+* restart --since X
 
 maybe
 -----
@@ -41,6 +42,7 @@ maybe
 * replace "started job" msg with standard tabout display (without sorting and
   buffering)
 * artifact manipulation commands
+* colored output
 
 unlikely
 --------
