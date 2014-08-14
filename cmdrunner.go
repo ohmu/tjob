@@ -36,9 +36,9 @@ type runnerPosArgs struct {
 type runnerIDCmd struct {
 	URL           string `long:"url" description:"Jenkins URL"`
 	User          string `long:"user" description:"Jenkins/SSH username"`
-	SSHPort       int    `long:"ssh-port" description:"Jenkins SSH port" default:"54410"`
-	SSHKey        string `long:"ssh-key" description:"Jenkins SSH private key" default:"id_rsa"`
-	Insecure      string `long:"insecure" description:"Skip TLS server cert validation" default:"false"`
+	SSHPort       int    `long:"ssh-port" description:"Jenkins SSH port"`
+	SSHKey        string `long:"ssh-key" description:"Jenkins SSH private key"`
+	Insecure      string `long:"insecure" description:"Skip TLS server cert validation"`
 	runnerPosArgs `positional-args:"yes" required:"yes"`
 }
 
@@ -54,13 +54,25 @@ func (r *runnerAddCmd) Execute(args []string) error {
 			"runner '%s' already exists, use the 'update' command",
 			r.RunnerID)
 	}
-	sshPort := sshcmd.SSHPort(r.SSHPort)
-	insecure, err := strconv.ParseBool(r.Insecure)
+	sshPortInt := 54410
+	if r.SSHPort != 0 {
+		sshPortInt = r.SSHPort
+	}
+	sshPort := sshcmd.SSHPort(sshPortInt)
+	insecureStr := "false"
+	if r.Insecure != "" {
+		insecureStr = r.Insecure
+	}
+	insecure, err := strconv.ParseBool(insecureStr)
 	if err != nil {
 		return err
 	}
+	sshKey := "id_rsa"
+	if r.SSHKey != "" {
+		sshKey = r.SSHKey
+	}
 	conf.Runners[r.RunnerID] = &config.Runner{
-		URL: r.URL, SSHPort: sshPort, SSHKey: r.SSHKey, User: r.User,
+		URL: r.URL, SSHPort: sshPort, SSHKey: sshKey, User: r.User,
 		Insecure: insecure,
 	}
 
