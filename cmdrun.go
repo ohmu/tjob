@@ -69,6 +69,16 @@ func startJob(runner *config.Runner, job *config.Job) (*config.Job, error) {
 		job.Options, job.Tags}, nil
 }
 
+func expandTags(tags []string) []string {
+	out := make([]string, 0, len(tags))
+	for _, multitag := range tags {
+		for _, tag := range strings.Split(multitag, ",") {
+			out = append(out, tag)
+		}
+	}
+	return out
+}
+
 func (r *runJobCmd) Execute(args []string) error {
 	conf, err := config.Load(globalFlags.ConfigFile)
 	if err != nil {
@@ -76,7 +86,7 @@ func (r *runJobCmd) Execute(args []string) error {
 	}
 	start := make(chan *config.Job, r.NumBuilds)
 	for nBuild := 0; nBuild < r.NumBuilds; nBuild++ {
-		start <- &config.Job{r.RunnerID, r.JobName, "", r.Option, r.Tags}
+		start <- &config.Job{r.RunnerID, r.JobName, "", r.Option, expandTags(r.Tags)}
 	}
 	close(start)
 	started := jobStarter{Input: start, Output: make(chan *config.Job, 10),

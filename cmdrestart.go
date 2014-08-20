@@ -44,7 +44,7 @@ func (r *restartJobCmd) Execute(args []string) error {
 		display: &displayOptions{NoSorting: true}}
 	jobCopies := jobCopier{Input: postFiltered.Output,
 		Output: make(chan *config.Job, 10), Options: r.Option,
-		Tags: r.Tags}
+		Tags: expandTags(r.Tags)}
 	started := jobStarter{Input: jobCopies.Output,
 		Output: make(chan *config.Job, 10), conf: conf}
 	results := startResultPrinter{Input: started.Output,
