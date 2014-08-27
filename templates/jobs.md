@@ -1,6 +1,6 @@
 | JOB | BUILD | STATUS | PASS | SKIP | FAIL | URL |
 |-----|-------|--------|------|------|------|-----|
-{{range .Tasks}}| {{.JobName}} | {{.BuildNumber}} | {{.Status.Result}} | {{.Status.PassCount}} | {{.Status.SkipCount}} | {{.Status.FailCount}} | {{.Status.URL}} |
+{{range .Tasks}}| {{.JobName}} | {{.BuildNumber}} | {{if .Status.TestReport}}{{.Status.Result}} | {{.Status.PassCount}} | {{.Status.SkipCount}} | {{.Status.FailCount}}{{else}} | | | {{end}}| {{.Status.URL}} |
 {{end}}
 
 | JOB | BUILD | RESULT | CLASS | TEST CASE |
