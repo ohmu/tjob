@@ -73,9 +73,9 @@ func (node *remoteJobQuery) Run() error {
 		for _, jobName := range jobs {
 			// TODO: filterJob is only created for filtering, something better?
 			filterJob := config.Job{
-				runnerName, jobName,
-				"", map[string]string{},
-				[]string{}}
+				Runner: runnerName, JobName: jobName,
+				BuildNumber: "", Options: map[string]string{},
+				Tags: []string{}}
 			matched, err := filterByJobName(node.flags, &filterJob)
 			if err != nil {
 				return node.AbortWithError(err)
@@ -93,9 +93,9 @@ func (node *remoteJobQuery) Run() error {
 				case <-node.AbortChannel():
 					return nil
 				case node.Output <- &config.Job{
-					runnerName, jobName,
-					buildNumber, map[string]string{},
-					[]string{}}:
+					Runner: runnerName, JobName: jobName,
+					BuildNumber: buildNumber, Options: map[string]string{},
+					Tags: []string{}}:
 				}
 			}
 		}
