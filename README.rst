@@ -8,9 +8,9 @@ tjob - Test Job Management Utility
 
 Building
 ========
-#. Install Go >=1.2 and setup a proper ``$GOPATH``
-#. ``make dep`` installs the dependency libraries
-#. ``go build`` builds the stand-alone executable ``tjob``
+#. Install Go >=1.2 and setup a proper ``$GOPATH`` (e.g. ``export GOPATH=~/gopath``)
+#. ``go get github.com/ohmu/tjob`` pulls the sources (and dependencies) under ``$GOPATH/src/``
+#. ``go install github.com/ohmu/tjob`` builds the stand-alone executable to ``$GOPATH/bin/tjob``
 
 Getting Started
 ===============
