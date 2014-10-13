@@ -51,7 +51,7 @@ func (r *runnerAddCmd) Execute(args []string) error {
 	}
 	if _, exists := conf.Runners[r.RunnerID]; exists {
 		return fmt.Errorf(
-			"runner '%s' already exists, use the 'update' command",
+			"runner '%s' already exists, use the 'runner update' command",
 			r.RunnerID)
 	}
 	sshPortInt := 54410
@@ -88,7 +88,7 @@ func (r *runnerUpdateCmd) Execute(args []string) error {
 	}
 	if _, exists := conf.Runners[r.RunnerID]; !exists {
 		return fmt.Errorf(
-			"runner '%s' does not exist, use the 'add' command",
+			"runner '%s' does not exist, use the 'runner add' command",
 			r.RunnerID)
 	}
 	if value := r.URL; value != "" {

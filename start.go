@@ -51,7 +51,7 @@ func (node *jobStarter) Run() error {
 	for job := range node.Input {
 		runner, exists := node.conf.Runners[job.Runner]
 		if !exists {
-			return node.AbortWithError(fmt.Errorf("runner '%s' does not exists, use the 'runner create' command\n", job.Runner))
+			return node.AbortWithError(fmt.Errorf("runner '%s' does not exists, use the 'runner add' command\n", job.Runner))
 		}
 		limiter <- true
 		job, err := startJob(runner, job)
