@@ -27,6 +27,9 @@ certainly
   start until jenkins has figured out the correct revision
 * "-T a,b" needs to work like "-T a -T b"
 * restart --since X
+* restart only starts max one build per job
+* "-O foo" without value should produce an error
+* run: able to launch jobs when jenkins is congested without timeouts (record queued build)
 
 maybe
 -----
