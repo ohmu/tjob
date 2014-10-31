@@ -19,6 +19,7 @@ type filterFlags struct {
 	FilterOptions map[string]string `short:"o" long:"option" description:"Select only builds with option key:value"`
 	FilterRunner  []string          `short:"r" long:"runner" description:"Select only builds for the given runner"`
 	FilterJob     []string          `short:"j" long:"job" description:"Select only builds for the given job"`
+	FilterBuild   []string          `short:"b" long:"build" description:"Select only builds with buildnumber"`
 	OnlyAllFailed bool              `long:"all-failed" description:"Select only failed builds"`
 	OnlyFailing   bool              `long:"failing" description:"Select only currently failing builds"`
 }
@@ -92,6 +93,10 @@ func filterByJobName(r *filterFlags, job *config.Job) (bool, error) {
 	return listFilter(r.FilterJob, job.JobName)
 }
 
+func filterByBuildNumber(r *filterFlags, job *config.Job) (bool, error) {
+	return listFilter(r.FilterBuild, job.BuildNumber)
+}
+
 func filterByRunnerName(r *filterFlags, job *config.Job) (bool, error) {
 	return listFilter(r.FilterRunner, job.Runner)
 }
@@ -117,7 +122,7 @@ func (node *jobFilterer) Run() error {
 	defer close(node.Output)
 	for job := range node.Input {
 		matched, err := multiFilter(node.flags, job, filterByTags,
-			filterByOptions, filterByJobName,
+			filterByOptions, filterByJobName, filterByBuildNumber,
 			filterByRunnerName)
 		if err != nil {
 			return node.AbortWithError(err)

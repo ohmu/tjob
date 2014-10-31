@@ -43,7 +43,7 @@ type displayOptions struct {
 	ShowTestTraceback bool          `short:"s" long:"stack-trace" description:"Show failed test stack traces"`
 	ShowTestOutput    bool          `short:"p" long:"output" description:"Show failed test stdout/stderr"`
 	ShowBuildURL      bool          `short:"l" long:"url" description:"Show build URL link"`
-	ShowBuilder       bool          `short:"b" long:"builder" description:"Show builder"`
+	ShowBuilder       bool          `long:"builder" description:"Show builder"`
 	ShowTags          bool          `long:"tags" description:"Show tags"`
 	ShowUser          bool          `short:"u" long:"username" description:"Show username"`
 	ShowCommitID      bool          `short:"c" long:"commit-id" description:"Show version-control commit-id"`
