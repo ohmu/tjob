@@ -23,8 +23,8 @@ func init() {
 		&restartJobCmd{})
 	globalParser().AddCommand("list", "List jobs", "List jobs",
 		&listJobsCmd{})
-	globalParser().AddCommand("clear", "Clear jobs", "Clear jobs",
-		&clearJobsCmd{})
+	globalParser().AddCommand("remove", "Remove jobs", "Remove jobs",
+		&removeJobsCmd{})
 }
 
 func handleErrors(errors <-chan error) error {
