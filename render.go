@@ -15,6 +15,7 @@ import (
 	"github.com/ohmu/tjob/pipeline"
 	"os"
 	"sort"
+	"strings"
 	"sync"
 	"time"
 )
@@ -50,6 +51,8 @@ func (node *resultFilterer) Run() error {
 	for cur := range node.Input {
 		var sendVal *JobStatus
 		switch {
+		case node.flags.FilterCommit != "" &&
+			(cur.Status == nil || !strings.HasPrefix(cur.Status.CommitID(), node.flags.FilterCommit)):
 		case node.display.SinceDuration != 0 &&
 			!filterByStartedSince(node.display, cur.Status):
 		case node.flags.OnlyAllFailed && (cur.Status == nil ||
