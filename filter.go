@@ -20,6 +20,7 @@ type filterFlags struct {
 	FilterRunner  []string          `short:"r" long:"runner" description:"Select only builds for the given runner"`
 	FilterJob     []string          `short:"j" long:"job" description:"Select only builds for the given job"`
 	FilterBuild   []string          `short:"b" long:"build" description:"Select only builds with buildnumber"`
+	FilterCommit  string            `short:"m" long:"commit" description:"Select only build with certain commit"`
 	OnlyAllFailed bool              `long:"all-failed" description:"Select only failed builds"`
 	OnlyFailing   bool              `long:"failing" description:"Select only currently failing builds"`
 }
