@@ -17,8 +17,8 @@ import (
 )
 
 type runJobPosArgs struct {
-	RunnerID string `description:"Runner ID"`
-	JobName  string `description:"Name of the job to run"`
+	RunnerID string   `description:"Runner ID"`
+	JobNames []string `description:"Name of the job to run"`
 }
 
 type runJobFlags struct {
@@ -84,9 +84,11 @@ func (r *runJobCmd) Execute(args []string) error {
 	if err != nil {
 		return err
 	}
-	start := make(chan *config.Job, r.NumBuilds)
+	start := make(chan *config.Job, r.NumBuilds*len(r.JobNames))
 	for nBuild := 0; nBuild < r.NumBuilds; nBuild++ {
-		start <- &config.Job{r.RunnerID, r.JobName, "", r.Option, expandTags(r.Tags)}
+		for _, jobName := range r.JobNames {
+			start <- &config.Job{r.RunnerID, jobName, "", r.Option, expandTags(r.Tags)}
+		}
 	}
 	close(start)
 	started := jobStarter{Input: start, Output: make(chan *config.Job, 10),
